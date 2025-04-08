@@ -10,51 +10,51 @@ generator client {
 
 // prisma/schema.prisma
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
   // uncomment next line if you use Prisma <5.10
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
-model Users{
-  userID          Int         @id     @default(autoincrement())
-  username        String      @unique
-  password        String      @unique
-  phoneNum        String      @unique
-  isOnline        Boolean   
-  roleID          Int         // Admin : 0, Seller : 1, User : 2
-  regDate         DateTime    @default(now())
-  updateDate      DateTime    @updatedAt
-  userinfo        UserInfo[]
+model Users {
+  userID     Int        @id @default(autoincrement())
+  username   String     @unique
+  password   String     @unique
+  phoneNum   String     @unique
+  isOnline   Boolean
+  roleID     Int // Admin : 0, Seller : 1, User : 2
+  regDate    DateTime   @default(now())
+  updateDate DateTime   @updatedAt
+  userinfo   UserInfo[]
   // userownproduct  UserOwnProduct[]
 }
 
-model UserInfo{
-  userId        Int       @id     @default(autoincrement())
-  user          Users     @relation(fields: [userId], references: [userID])  
+model UserInfo {
+  userId        Int     @id @default(autoincrement())
+  user          Users   @relation(fields: [userId], references: [userID])
   firstName     String?
   lastName      String?
-  houseNo       Int?     // บ้าน/ห้องเลขที่
-  villageNo     Int?     // หมู่ที่
-  alley         String?  // ซอย
-  road          String?  // ถนน
-  subDistract   String?  // แขวง/ตำบล
-  province      String?  // จังหวัด
-  countery      String?  // ประเทศ
-  postcode      String?  // รหัสไปรษณีย์
-  addressNum    String?  // เบอร์ติดต่อ  
-  paymentMethod String?  // วิธีชำระเงิน
+  houseNo       Int? // บ้าน/ห้องเลขที่
+  villageNo     Int? // หมู่ที่
+  alley         String? // ซอย
+  road          String? // ถนน
+  subDistract   String? // แขวง/ตำบล
+  province      String? // จังหวัด
+  countery      String? // ประเทศ
+  postcode      String? // รหัสไปรษณีย์
+  addressNum    String? // เบอร์ติดต่อ  
+  paymentMethod String? // วิธีชำระเงิน
 }
 
-model Products{
-  productID     Int       @id    @default(autoincrement())
-  productName   String
-  description   String?   // คำอธิบายสินค้า
-  category      String    // ประเภท
-  price         Int     
-  Amount        Int       // จำนวนราคาสินค้า
-  addedDate     DateTime  @default(now()) 
-  updateDate    DateTime  @updatedAt
+model Products {
+  productID   Int      @id @default(autoincrement())
+  productName String
+  description String? // คำอธิบายสินค้า
+  category    String // ประเภท
+  price       Int
+  amount      Int // จำนวนราคาสินค้า
+  addedDate   DateTime @default(now())
+  updateDate  DateTime @updatedAt
   // userownproduct UserOwnProduct[]
 }
 
@@ -66,4 +66,4 @@ model Products{
 //   @@id([productID, userID])
 // }
 
-// npx prisma migrate dev -- name ""
+// npx prisma migrate dev --name ""
